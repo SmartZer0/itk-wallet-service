@@ -37,9 +37,8 @@ func (s *WalletService) ProcessOperation(ctx context.Context, walletID string, o
 	if err != nil {
 		return fmt.Errorf("cannot begin tx: %w", err)
 	}
-	defer func() { _ = tx.Rollback() }() // на случай паники или ошибки
+	defer func() { _ = tx.Rollback() }()
 
-	// Получаем баланс с блокировкой (FOR UPDATE)
 	currentBalance, err := s.repo.GetBalanceForUpdate(ctx, tx, walletID)
 	if err != nil {
 		return fmt.Errorf("cannot get balance: %w", err)

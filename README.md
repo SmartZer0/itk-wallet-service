@@ -30,7 +30,6 @@
 - [mux](https://github.com/gorilla/mux)
 - [sqlmock](https://github.com/DATA-DOG/go-sqlmock)
 - [testify](https://github.com/stretchr/testify)
-- [zap (для логирования)](https://github.com/uber-go/zap) — _опционально_
 
 ---
 

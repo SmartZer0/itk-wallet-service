@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14
+    container_name: wallet_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: walletdb
+      POSTGRES_USER: wallet
+      POSTGRES_PASSWORD: walletpass
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wallet_app
+    ports:
+      - "8080:8080"
+    env_file:
+      - config.env
+    depends_on:
+      - db
+
+volumes:
+  db-data:
